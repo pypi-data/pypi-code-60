@@ -1,0 +1,26 @@
+"""
+Author = Kowsher Ahmed, Avishek Das,
+Email = ahmedshuvo969@gmail.com, avishek.das.ayan@gmail.com
+"""
+
+from pathlib import Path
+script_location = Path(__file__).absolute().parent
+
+vec_loc = script_location / "vectorizer"
+model_loc = script_location / "classifier"
+
+import pickle
+
+def tokenizer(text):
+  return text.split()
+global tokenizer
+with open(vec_loc, 'rb') as p:
+    vect = pickle.load(p)
+with open(model_loc, 'rb') as p:
+    clas = pickle.load(p)
+
+def predict(text):
+	t = vect.transform([s])
+	cl = clas.predict(t)
+	if cl==0: return "Negative"
+	else: return "Positive"
